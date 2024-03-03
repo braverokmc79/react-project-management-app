@@ -8,7 +8,35 @@ function App() {
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined,
     projects: [],
+    tasks:[]
   });
+
+  function handleAddTask(text){
+    setProjectsState(prevState=>{
+      const taskId=Math.random();
+      const newTask ={
+        text:text,
+        projectId:prevState.selectedProjectId,
+        id:taskId
+      };
+
+      return {
+        ...prevState,
+        tasks: [newTask, ...prevState.tasks]
+      }
+    });
+  }
+
+  function handleDeleteTask(id){
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        tasks: prevState.tasks.filter((task) => task.id !== id)
+         };
+    });
+  }
+
+
 
   //1.프로젝트 등록 화면 이동
   function handleStartAddProject() {
@@ -74,8 +102,9 @@ function App() {
 
   const selectedProejct =projectsState.projects.find(project=>project.id === projectsState.selectedProjectId);
 
-  console.log("selectedProejct ", selectedProejct);
-  let content=selectedProejct &&  <SelectedProject   project={selectedProejct} onDelete={handleDeleteProject} />
+  //console.log("selectedProejct ", selectedProejct);
+  let content=selectedProejct &&  <SelectedProject   project={selectedProejct} onDelete={handleDeleteProject}  
+       onAddTask={handleAddTask}  onDeleteTask={handleDeleteTask}  tasks={projectsState.tasks} />
 
 
 
@@ -91,6 +120,7 @@ function App() {
       <ProjectsSidebar onStartAddProject={handleStartAddProject} 
           projects={projectsState.projects}  
           onSelectProject={handleSelectProject}
+          selectProjectId={projectsState.selectedProjectId}
       />
       {content}
     </main>
