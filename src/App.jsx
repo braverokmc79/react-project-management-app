@@ -58,11 +58,24 @@ function App() {
       };
     });
   }
+  
+
+  //5. 프로젝트 삭제
+  function handleDeleteProject(){
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId:undefined,
+        projects: prevState.projects.filter((project) => project.id !== prevState.selectedProjectId)
+         };
+    });
+  }
+
 
   const selectedProejct =projectsState.projects.find(project=>project.id === projectsState.selectedProjectId);
 
   console.log("selectedProejct ", selectedProejct);
-  let content=selectedProejct &&  <SelectedProject   project={selectedProejct}  />
+  let content=selectedProejct &&  <SelectedProject   project={selectedProejct} onDelete={handleDeleteProject} />
 
 
 
