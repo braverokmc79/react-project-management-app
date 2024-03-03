@@ -25,7 +25,7 @@ const NewTask = ({onAdd}) => {
       <button className="text-stone-100 bg-stone-600 px-2 py-1  rounded-md hover:text-stone-150  hover:bg-stone-950"
             onClick={handleClick}
         >
-        Add Task
+       작업추가
       </button>
     </div>
   );

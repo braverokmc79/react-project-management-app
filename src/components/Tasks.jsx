@@ -4,9 +4,9 @@ import NewTask from './NewTask'
 const Tasks = ({tasks, onAddTask, onDeleteTask}) => {
   return (
     <section>
-          <h2 className='text-2xl font-bold text-stone-700 mb-4'>Tasks</h2>
+          <h2 className='text-2xl font-bold text-stone-700 mb-4'>작업</h2>
           <NewTask onAdd={onAddTask}  />
-          <p className='text-stone-800 my-4 ' >This project does not have any taks yet.</p>
+          <p className='text-stone-800 my-4 ' >이 프로젝트에는 아직 작업이 없습니다.</p>
          
           
           {tasks.length >0 &&            
@@ -17,7 +17,7 @@ const Tasks = ({tasks, onAddTask, onDeleteTask}) => {
                             <span>{task.text}</span>
                             <button className='text-stone-700 hover:text-red-500' 
                                 onClick={()=>onDeleteTask(task.id)}
-                            >Clear</button>
+                            >취소</button>
                         </li>
                     )
                 })}

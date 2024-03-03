@@ -6,7 +6,7 @@ const ProjectsSidebar = ({onStartAddProject, projects, onSelectProject, selectPr
         <h2 className='mb-8 font-bold uppercase md:text-xl text-stone-200'>Your Projects</h2>
         <div>
        
-            <Button onClick={onStartAddProject} >+ Add Project</Button>
+            <Button onClick={onStartAddProject} >+ 프로젝트 추가</Button>
 
         </div>
         <ul className='mt-8'>

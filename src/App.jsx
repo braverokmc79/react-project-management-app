@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewProject from "./components/NewProject";
 import NoProjectSelect from "./components/NoProjectSelect";
 import ProjectsSidebar from "./components/ProjectsSidebar";
@@ -11,31 +11,46 @@ function App() {
     tasks:[]
   });
 
+
+  useEffect(() => {
+   const getData= localStorage.getItem("projectsState");
+   
+   if(getData && getData!==undefined){
+    console.log(JSON.parse(getData));
+    setProjectsState(JSON.parse(getData));
+   }
+
+
+  },[]);
+
+   //작업 추가
   function handleAddTask(text){
-    setProjectsState(prevState=>{
-      const taskId=Math.random();
-      const newTask ={
-        text:text,
-        projectId:prevState.selectedProjectId,
-        id:taskId
-      };
+    const taskId=Math.random();
+    const newTask ={
+      text:text,
+      projectId:projectsState.selectedProjectId,
+      id:taskId
+    };
 
-      return {
-        ...prevState,
-        tasks: [newTask, ...prevState.tasks]
-      }
-    });
+    const inputData={
+      ...projectsState,
+      tasks: [newTask, ...projectsState.tasks]
+    }
+    setProjectsState(inputData);
+
+    localStorage.setItem("projectsState",JSON.stringify(inputData));
   }
 
+  //작업 삭제
   function handleDeleteTask(id){
-    setProjectsState((prevState) => {
-      return {
-        ...prevState,
-        tasks: prevState.tasks.filter((task) => task.id !== id)
-         };
-    });
-  }
+    const inputData={
+      ...projectsState,
+      tasks: projectsState.tasks.filter((task) => task.id !== id)
+    }
+    setProjectsState(inputData);
 
+    localStorage.setItem("projectsState",JSON.stringify(inputData));
+  }
 
 
   //1.프로젝트 등록 화면 이동
@@ -61,19 +76,20 @@ function App() {
 
   //3.프로젝트 등록
   function handleAddProject(projectData){
-    setProjectsState(prevState=>{
-      const proejctId=Math.random();
-      const newProject ={
-        ...projectData,
-        id:proejctId
-      };
+    const proejctId=Math.random();
+    const newProject ={
+      ...projectData,
+      id:proejctId
+    };
+    const inputData={
+      ...projectsState,
+      selectedProjectId: undefined,
+      projects: [...projectsState.projects, newProject]
+    }
 
-      return {
-        ...prevState,
-        selectedProjectId: undefined,
-        projects: [...prevState.projects, newProject]
-      }
-    });
+    setProjectsState(inputData);
+
+    localStorage.setItem("projectsState",JSON.stringify(inputData));
 
   }
 
@@ -90,13 +106,15 @@ function App() {
 
   //5. 프로젝트 삭제
   function handleDeleteProject(){
-    setProjectsState((prevState) => {
-      return {
-        ...prevState,
-        selectedProjectId:undefined,
-        projects: prevState.projects.filter((project) => project.id !== prevState.selectedProjectId)
-         };
-    });
+    const inputData={
+      ...projectsState,
+      selectedProjectId:undefined,
+      projects: projectsState.projects.filter((project) => project.id !== projectsState.selectedProjectId)
+
+    }
+
+    setProjectsState(inputData);
+    localStorage.setItem("projectsState",JSON.stringify(inputData));
   }
 
 
