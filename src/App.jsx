@@ -3,7 +3,6 @@ import NewProject from "./components/NewProject";
 import NoProjectSelect from "./components/NoProjectSelect";
 import ProjectsSidebar from "./components/ProjectsSidebar";
 import SelectedProject from "./components/SelectedProject";
-import Footer from "./components/Footer";
 
 function App() {
   const [projectsState, setProjectsState] = useState({
