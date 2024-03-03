@@ -1,5 +1,6 @@
 import React from 'react'
 import Tasks from './Tasks'
+import Footer from './Footer'
 
 const SelectedProject = ({project, onDelete, onAddTask, onDeleteTask , tasks}) => {
 
@@ -24,6 +25,8 @@ const SelectedProject = ({project, onDelete, onAddTask, onDeleteTask , tasks}) =
         </header>
         <Tasks onAddTask={onAddTask}  onDeleteTask={onDeleteTask} tasks={tasks} />
 
+
+        <Footer  />
     </div>
   )
 }

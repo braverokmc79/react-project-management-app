@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Input from "./Input";
 import Modal from "./Modal";
+import Footer from "./Footer";
 
 const NewProject = ({ onAdd , onCancel}) => {
   const modal=useRef();
@@ -62,6 +63,9 @@ const NewProject = ({ onAdd , onCancel}) => {
         <Input ref={description} label="내용(50글자미만)" textarea />
         <Input type="date"  ref={dueDate} label="마감일" />
       </div>
+
+
+      <Footer  />
     </div>
     </>
   );

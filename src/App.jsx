@@ -3,6 +3,7 @@ import NewProject from "./components/NewProject";
 import NoProjectSelect from "./components/NoProjectSelect";
 import ProjectsSidebar from "./components/ProjectsSidebar";
 import SelectedProject from "./components/SelectedProject";
+import Footer from "./components/Footer";
 
 function App() {
   const [projectsState, setProjectsState] = useState({
@@ -134,6 +135,7 @@ function App() {
   }
 
   return (
+    <>
     <main className="h-screen my-8 flex gap-8">
       <ProjectsSidebar onStartAddProject={handleStartAddProject} 
           projects={projectsState.projects}  
@@ -141,7 +143,12 @@ function App() {
           selectProjectId={projectsState.selectedProjectId}
       />
       {content}
+
+    
     </main>
+   
+   
+    </>
   );
 }
 
